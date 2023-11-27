@@ -2,6 +2,8 @@ import Input from "@/components/input";
 import Image from "next/image";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -9,11 +11,26 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [variant, setVariant] = useState("login");
 
+  const router = useRouter();
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant === "login" ? "register" : "login"
     );
   }, []);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/"
+      });
+      router.push("/");
+    } catch (error) {
+      console.log("kuna mambo hapa", error);
+    }
+  }, [email, password, router]);
 
   const register = useCallback(async () => {
     try {
@@ -22,10 +39,12 @@ const Auth = () => {
         email,
         password
       });
+      login();
     } catch (error) {
       console.log("kuna mambo hapa", error);
     }
-  }, [name, email, password]);
+  }, [name, email, password, login]);
+
   return (
     <div className="relative h-[100vh] w-full bg-[url('/imgs/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
@@ -63,7 +82,7 @@ const Auth = () => {
               />
             </div>
             <button
-              onClick={register}
+              onClick={variant === "login" ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
             >
               {variant === "login" ? "Login" : " Sign Up"}
