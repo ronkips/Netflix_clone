@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -22,7 +22,7 @@ const authOptions: AuthOptions = {
       credentials: {
         email: {
           label: "Email",
-          type: "email"
+          type: "text"
         },
         password: {
           label: "Password",
@@ -39,6 +39,7 @@ const authOptions: AuthOptions = {
             email: credentials.email
           }
         });
+        console.log("USER", user);
 
         if (!user || !user.hashedPassword) {
           throw new Error("Email does not exist");

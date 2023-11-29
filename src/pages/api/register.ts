@@ -19,6 +19,8 @@ export default async function handler(
       }
     });
 
+    console.log("EXISTINGUSER", existingUser)
+
     if (existingUser) {
       return res.status(422).json({ error: "Email taken" });
     }

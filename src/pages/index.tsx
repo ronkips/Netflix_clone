@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <h1 className="text-3xl text-red-500">Hello</h1>
-      <p className="text-white">Logged in as :{user?.email}</p>
+      <p className="text-white">Logged in as :{user?.name}</p>
       <button
         className=" h-10 w-full bg-white"
         type="button"
