@@ -22,7 +22,16 @@ export async function getServerSideProps(context: NextPageContext) {
 export default function Home() {
   return (
     <>
-   <Navbar/>
+      <Navbar />
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <h1 className="text-6xl font-bold">Welcome to Next.js!</h1>
+        <button
+          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md"
+          onClick={() => signOut()}
+        >
+          Sign Out
+        </button>
+      </div>
     </>
   );
 }

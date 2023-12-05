@@ -12,8 +12,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   return (
     <div className="bg-black w-40 absolute top-14 right-0 py-5 flex-col border-2  border-gray-800 flex ">
       <div className=" flex flex-col gap-3">
-        <div className="px-3 group/item flex flex-grow items-center w-full">
-          <Image src="/imgs/user.png" alt="Avatar" width={30} height={30} />
+        <div className="px-3 gap-3 group/item flex flex-grow items-center w-full">
+          <Image src="/imgs/user.png" alt="Avatar" width={20} height={20} className="rounded" />
           <p className="text-white text-sm group/items-hover:underline">
             Username
           </p>
@@ -21,9 +21,9 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         <div className="bg-gray-600 border-0 h-px my-4">
           <div
             onClick={() => signOut()}
-            className="px-3 py-2 text-center text-white"
+            className="px-3 py-2 text-center text-sm text-white hover:underline"
           >
-            Sidn Out
+            Sign Out of Netflix
           </div>
         </div>
       </div>

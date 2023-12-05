@@ -1,15 +1,31 @@
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavItems from "./NavItems";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsMenuDown } from "react-icons/bs";
 import { BsChevronCompactUp } from "react-icons/bs";
 import MobileMenu from "./MobileMenu";
 import { BsSearch, BsBell } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
 
+const TOP_OFFSET = 67;
+
 const Navbar = () => {
   const [showMenuMobile, setShowMenuMobile] = useState(false);
   const [showAccountMenu, setShoAccountMenu] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > TOP_OFFSET) {
+        setShowBackground(true);
+      } else {
+        setShowBackground(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }
+  , []);
   const toggleMobileMenu = useCallback(() => {
     setShowMenuMobile((current) => !current);
   }, []);
@@ -40,11 +56,11 @@ const Navbar = () => {
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
           <p className="text-white text-sm">Browse</p>
-          {showMenuMobile ? (
-            <BsChevronCompactUp className="text-white transition" />
-          ) : (
-            <BsChevronDown className="text-white transition" />
-          )}
+          <BsChevronDown
+            className={`text-white transition ${
+              showMenuMobile ? `rotate-180` : `rotate-0`
+            }`}
+          />
           <MobileMenu visible={showMenuMobile} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center ">
@@ -56,16 +72,16 @@ const Navbar = () => {
           </div>
           <div
             onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 cursor-pointer relative"
+            className="flex flex-row items-center gap-2  cursor-pointer relative"
           >
             <div className="w-6 h-6 lg:w-5 lg:h-5 rounded-md overflow-hidden">
               <Image src="/imgs/user.png" alt="Avatar" width={30} height={30} />
             </div>
-            {showAccountMenu ? (
-              <BsChevronCompactUp className="text-white transition" />
-            ) : (
-              <BsChevronDown className="text-white transition" />
-            )}
+            <BsChevronDown
+              className={`text-white transition ${
+                showAccountMenu ? `rotate-180` : `rotate-0`
+              }`}
+            />
             <AccountMenu visible={showAccountMenu} />
           </div>
         </div>
