@@ -1,26 +1,47 @@
 import useBillboard from "@/hooks/useBillboard";
 import React from "react";
+import { GrCircleInformation } from "react-icons/gr";
 
 const Billboard = () => {
   const { data } = useBillboard();
   return (
-    <div className=" relative h-[33.25vw]">
+    <div className=" relative h-[33.25vw] ">
       <video
-        className="w-full h-[33.25vw] object-cover brightness-[60%]"
+        className="w-full h-[63.25vw] object-cover brightness-[60%] md:h-[52vh]"
         autoPlay
         muted
         loop
         poster={data?.thumbnailUrl}
         src={data?.videoUrl}
       ></video>
-      <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16 ">
+      <div className="absolute top-[70%] md:top-[40%] ml-4 md:ml-16 ">
         <p className="text-white text-xl first-letter md:text-5xl h-full w-[90] lg:text-5xl font-bold">
           {data?.title}
         </p>
         <p className="text-white text-[8px] md:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[60%] drop-shadow-2xl">
           {data?.description}
-              </p>
-              <p className=""></p>
+        </p>
+        <div className="flex flex-row items-center mt-3 md:mt-4 gap-3  ">
+          <button
+            className="bg-white
+            text-white
+              bg-opacity-30 
+              rounded-md 
+              py-1 md:py-2 
+              px-2 md:px-4
+              w-auto 
+              text-xs lg:text-lg 
+              font-semibold
+              flex
+              flex-row
+              items-center
+              hover:bg-opacity-20
+              transition"
+          >
+            <GrCircleInformation className="mr-1" />
+            More Info
+          </button>
+        </div>
       </div>
     </div>
   );
