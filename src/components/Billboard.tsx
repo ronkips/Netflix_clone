@@ -7,7 +7,7 @@ const Billboard = () => {
   return (
     <div className=" relative h-[33.25vw] ">
       <video
-        className="w-full h-[63.25vw] object-cover brightness-[60%] md:h-[52vh]"
+        className="w-full h-[63.25vw] object-cover brightness-[60%] md:h-[52vh] sm:h-[60vh]"
         autoPlay
         muted
         loop

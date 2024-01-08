@@ -1,5 +1,6 @@
 import { LayoutProps } from "@/types";
 import Head from "next/head";
+import Logo from "../../public/imgs/logo.png";
 
 export default function Layout({
   children,
@@ -25,7 +26,7 @@ export default function Layout({
         <meta property="og:description" content={description} />
         <meta
           property="og:image"
-          content="https://www.netflix.com/favicon.ico"
+          content="../../public/imgs/logo.png"
           key="ogImage"
         />
         <meta property="og:image:alt" content="My custom alt" />

@@ -24,6 +24,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function Home() {
   const { data: movies = [] } = useMoviesList();
+  console.log("movies**", movies);
   return (
     <Layout
       title="Netflix clone"
@@ -31,7 +32,7 @@ export default function Home() {
       navbar={<Navbar />}
     >
       <Billboard />
-      <div className="pb-40">
+      <div className="pb-40 ">
         <MovieList title="Trending Now" data={movies} />
       </div>
     </Layout>
