@@ -8,8 +8,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    const { currentUser } = await serverAuth(req);
     if (req.method === "POST") {
-      const { currentUser } = await serverAuth(req);
       const { movieId } = req.body;
       const existingMovie = await prismadb.movie.findUnique({
         where: {
@@ -18,7 +18,7 @@ export default async function handler(
       });
 
       if (!existingMovie) {
-        throw new Error("Movie does not exist");
+        throw new Error("Invalid movie id");
       }
 
       const user = await prismadb.user.update({
@@ -46,7 +46,7 @@ export default async function handler(
       });
 
       if (!existingMovie) {
-        throw new Error("Movie does not exist");
+        throw new Error("Ivalid movie id");
       }
 
       const updateFavouriteIds = without(currentUser.favouriteIds, movieId);
@@ -63,7 +63,7 @@ export default async function handler(
     }
     return res.status(405).end();
   } catch (error) {
-    console.log({ error });
+    console.log("noma , hapa hautoboi", error);
     return res.status(400).end();
   }
 }

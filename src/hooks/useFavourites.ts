@@ -13,8 +13,8 @@ const useFavourites = () => {
   );
   return {
     data,
-    isLoading,
     error,
+    isLoading,
     mutate
   };
 };

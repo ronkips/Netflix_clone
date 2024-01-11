@@ -5,6 +5,7 @@ import useMoviesList from "@/hooks/useMovies";
 import { NextPageContext } from "next";
 import { getSession, signOut } from "next-auth/react";
 import { Layout } from "@/layout";
+import useFavourites from "@/hooks/useFavourites";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -24,7 +25,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function Home() {
   const { data: movies = [] } = useMoviesList();
-  console.log("movies**", movies);
+  const { data: favourites = [] } = useFavourites();
   return (
     <Layout
       title="Netflix clone"
@@ -34,6 +35,7 @@ export default function Home() {
       <Billboard />
       <div className="pb-40 ">
         <MovieList title="Trending Now" data={movies} />
+        <MovieList title="My List" data={favourites} />
       </div>
     </Layout>
   );

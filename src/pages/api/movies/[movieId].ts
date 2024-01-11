@@ -5,16 +5,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method !== "GET") {
+    return res.status(405).end();
+  }
   try {
-    if (req.method !== "GET") {
-      return res.status(405).end();
-    }
     await serverAuth(req);
 
     const movieId = req.query;
 
     if (typeof movieId !== "string") {
-      throw new Error("Invalid movieId");
+      throw new Error("Invalid movie id");
     }
     if (!movieId) {
       throw new Error("Missing Id");
@@ -24,6 +24,10 @@ export default async function handler(
         id: movieId
       }
     });
+
+    if (!movies) {
+      throw new Error("Invalid movie id");
+    }
 
     return res.status(200).json(movies);
   } catch (error) {
