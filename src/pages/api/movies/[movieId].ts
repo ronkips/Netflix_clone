@@ -19,7 +19,7 @@ export default async function handler(
     if (!movieId) {
       throw new Error("Missing Id");
     }
-    const movies = await prismadb.movie.findMany({
+    const movies = await prismadb.movie.findUnique({
       where: {
         id: movieId
       }

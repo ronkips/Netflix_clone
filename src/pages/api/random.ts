@@ -12,7 +12,7 @@ export default async function handler(
   try {
     await serverAuth(req);
     const movieCount = await prismadb.movie.count();
-    // pucking any random thumbnail from the database
+    // picking any random thumbnail from the database
     const randomIndex = Math.floor(Math.random() * movieCount);
 
     const randomMovies = await prismadb.movie.findMany({

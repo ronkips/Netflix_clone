@@ -51,7 +51,7 @@ export default async function handler(
 
       const updateFavouriteIds = without(currentUser.favouriteIds, movieId);
 
-      const updateUser = await prismadb.user.update({
+      const updatedUser = await prismadb.user.update({
         where: {
           email: currentUser.email || ""
         },
@@ -59,7 +59,7 @@ export default async function handler(
           favouriteIds: updateFavouriteIds
         }
       });
-      return res.status(200).json(updateUser);
+      return res.status(200).json(updatedUser);
     }
     return res.status(405).end();
   } catch (error) {
