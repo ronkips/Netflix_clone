@@ -1,10 +1,17 @@
 import useBillboard from "@/hooks/useBillboard";
-import React from "react";
+import React, { useCallback } from "react";
 import { GrCircleInformation } from "react-icons/gr";
 import PlayButton from "./PlayButton";
+import useInfoModal from "@/hooks/useInfoModal";
 
 const Billboard = () => {
   const { data } = useBillboard();
+  const { openModal } = useInfoModal();
+
+  const handleOpenModal = useCallback(() => {
+    openModal(data?.id);
+  }, [data?.id, openModal]);
+
   return (
     <div className=" relative h-[33.25vw] ">
       <video
@@ -26,6 +33,7 @@ const Billboard = () => {
           <PlayButton movieId={data?.id} />
 
           <button
+            onClick={handleOpenModal}
             className="bg-white
             text-white
               bg-opacity-30 
