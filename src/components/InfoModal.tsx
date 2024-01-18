@@ -43,7 +43,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
             ></video>
             <div
               onClick={handleOnClose}
-              className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
+              className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center hover:bg-slate-500 "
             >
               <AiOutlineClose className="text-white" size={20} />
             </div>
@@ -59,8 +59,8 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
           </div>
           <div className="px-2 py-8">
             <p className="text-green-400 font-semibold text-lg">New</p>
-            <p className="text-white text-lg">{data?.duration}</p>
-            <p className="text-white text-lg">{data?.genre}</p>
+            <p className="text-blue-400 text-lg">{data?.duration}</p>
+            <p className="text-gray-400 text-lg">{data?.genre}</p>
             <p className="text-white text-lg">{data?.description}</p>
           </div>
         </div>
